@@ -28,7 +28,15 @@ function cordovaDevice() {
 		  if (request.status >= 200 && request.status < 400) {
 			// Success!
 			var resp = request.responseText;
-			console.log(resp);
+			
+			//document.getElementById("titolo_isbn").value=resp;
+			
+			//console.log(resp);
+			var data = JSON.parse(request.responseText);
+			console.log(data);
+			document.getElementById("titolo_isbn").value=data.items[0].volumeInfo.title;
+			
+			//console.log(data);
 		  } else {
 			// We reached our target server, but it returned an error
             console.log('error 1');  
@@ -53,7 +61,7 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
-		debugger;
+		//debugger;
         document.addEventListener('deviceready', this.onDeviceReady, false);
 		document.getElementById("cordovaDevice").addEventListener("click", cordovaDevice);
     },

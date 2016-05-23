@@ -16,6 +16,33 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+function cordovaDevice() {
+   var isbn_in=document.getElementById("input_isbn").value;
+   //alert(isbn_in);
+   
+   console.log('Received Event: deviceready');
+		var request = new XMLHttpRequest();
+		request.open('GET', 'https://www.googleapis.com/books/v1/volumes?q=isbn:'+isbn_in, true);
+
+		request.onload = function() {
+		  if (request.status >= 200 && request.status < 400) {
+			// Success!
+			var resp = request.responseText;
+			console.log(resp);
+		  } else {
+			// We reached our target server, but it returned an error
+            console.log('error 1');  
+		  }
+		};
+
+		request.onerror = function() {
+		   console.log('error 2'); 
+		  // There was a connection error of some sort
+		};
+
+		request.send();
+}
+ 
 var app = {
     // Application Constructor
     initialize: function() {
@@ -26,25 +53,26 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
+		debugger;
         document.addEventListener('deviceready', this.onDeviceReady, false);
+		document.getElementById("cordovaDevice").addEventListener("click", cordovaDevice);
     },
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
+    
+	
+	
+	onDeviceReady: function() {
+        app.receivedEvent();
+		//OttieniDatiIsbn();
+		
     },
     // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
+    receivedEvent: function() {
+        
+		
     }
 };
 

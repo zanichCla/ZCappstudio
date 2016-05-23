@@ -1,0 +1,6 @@
+#Dependency directory
+node_modules
+
+#Browser
+platforms/browser/build/
+platforms/browser/www/
